@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AuthService from "../services/auth.service"
 function Login() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ function Login() {
             [e.target.name]: "",
         });
     };
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();
         let valid = true;
@@ -44,13 +44,27 @@ function Login() {
         setErrors(newErrors);
 
         if (!valid) return;
+        try {
 
-        console.log(formData);
-        localStorage.setItem("token", "abc123");
+            const response = await AuthService.login(formData);
+            if (response.success) {
 
-        // API Call Here
+                localStorage.setItem("token", response.data.accessToken);
+                console.log("response.data.accessToken", response.data.refreshToken)
 
-        navigate("/home");
+                navigate("/home");
+            }
+        }
+        catch (error: any) {
+            console.log(error.response?.data?.message);
+
+        }
+        // console.log(formData);
+        // localStorage.setItem("token", "abc123");
+
+        // // API Call Here
+
+        // navigate("/home");
     };
 
 
