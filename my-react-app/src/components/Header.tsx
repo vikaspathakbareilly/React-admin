@@ -28,6 +28,8 @@ function Header() {
                 {" | "}
 
                 <Link to="/contact">Contact</Link>
+                {" | "}
+                <Link to="/product">Product</Link>
             </nav>
         </header>
     );
