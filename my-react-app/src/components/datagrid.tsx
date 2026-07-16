@@ -19,8 +19,10 @@ function DataGrid<T extends object>({
         <table className="table table-bordered table-striped">
             <thead className="table-dark">
                 <tr>
-                    {columns.map((col) => (
-                        <th key={String(col.accessor)}>{col.header}</th>
+                    {columns.map((col, index) => (
+                        <th key={`${String(col.accessor)}-${index}`}>
+                            {col.header}
+                        </th>
                     ))}
                 </tr>
             </thead>
@@ -28,8 +30,8 @@ function DataGrid<T extends object>({
             <tbody>
                 {data.map((row, index) => (
                     <tr key={index}>
-                        {columns.map((col) => (
-                            <td key={String(col.accessor)}>
+                        {columns.map((col, index) => (
+                            <td key={`${String(col.accessor)}-${index}`}>
                                 {col.render
                                     ? col.render(row)
                                     : String(row[col.accessor])}

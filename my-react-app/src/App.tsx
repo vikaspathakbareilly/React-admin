@@ -9,6 +9,7 @@ import PublicRoute from './gaurd/defaultRoute';
 import Login from './pages/login';
 import MainLayout from './layouts/MainLayout';
 import ProductPage from './pages/product';
+import UserPage from "./pages/user"
 function App() {
   const [count, setCount] = useState(0)
 
@@ -25,6 +26,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="product" element={<ProductPage />} />
+          <Route path="userlist" element={<UserPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
